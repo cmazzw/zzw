@@ -21,11 +21,29 @@ public class ExampleController {
 	@Autowired
 	private IRedisService redisService;
 
+
+    @RequestMapping("/sync")
+    public int sync(){
+        List<User> users = userService.getAll();
+        //ResponseModal modal = new ResponseModal(200,true,"",users);
+        //return modal;
+        int suceflag=1;
+        for(User user:users){
+            boolean isOk=redisService.set(user.getC_data_type()+"_"+user.getIiiii(),user.getC_data_type_new());
+            if(!isOk){
+                suceflag=0;
+                break;
+            }
+        }
+        return suceflag;
+    }
+
 	@RequestMapping("/users")
-	public ResponseModal users(){
+	public List<User> users(){
 		List<User> users = userService.getAll();
-		ResponseModal modal = new ResponseModal(200,true,"",users);
-		return modal;
+		//ResponseModal modal = new ResponseModal(200,true,"",users);
+		//return modal;
+        return users;
 	}
 
 	@RequestMapping("/redis/set")

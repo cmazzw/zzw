@@ -17,25 +17,15 @@ public class ExampleController {
 
 	@Autowired
 	private IUserService userService;
-	
+
 	@Autowired
 	private IRedisService redisService;
-/*
+
 	@RequestMapping("/users")
 	public ResponseModal users(){
 		List<User> users = userService.getAll();
 		ResponseModal modal = new ResponseModal(200,true,"",users);
 		return modal;
-		//return users;
-	}
-*/
-
-	@RequestMapping("/users")
-	public List<User> users(){
-		List<User> users = userService.getAll();
-		//ResponseModal modal = new ResponseModal(200,true,"",users);
-		//return modal;
-		return users;
 	}
 
 	@RequestMapping("/redis/set")
@@ -43,10 +33,11 @@ public class ExampleController {
 		boolean isOk = redisService.set("name", value);
 		return new ResponseModal(isOk ? 200 : 500, isOk, isOk ? "success" : "error" , null);
 	}
-	
+
 	@RequestMapping("/redis/get")
 	public ResponseModal redisGet(){
 		String name = redisService.get("name");
 		return new ResponseModal(200, true,"success",name);
 	}
+
 }

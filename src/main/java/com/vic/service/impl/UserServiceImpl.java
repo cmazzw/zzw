@@ -5,20 +5,21 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.vic.dao.IUserDao;
+
 import com.vic.entity.User;
 import com.vic.service.IUserService;
+
+import com.vic.mapper.UserMapper;
 
 @Service
 public class UserServiceImpl implements IUserService{
 
 	@Autowired
-	private IUserDao userDao;
-	
+	private UserMapper usermapper;
+
 	@Override
 	public List<User> getAll() {
 
-		return userDao.getAll();
+		return usermapper.getall();
 	}
-
 }
